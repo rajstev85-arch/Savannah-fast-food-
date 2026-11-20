@@ -1,0 +1,20 @@
+
+{
+  "name": "Savannah Fast Food",
+  "short_name": "Savannah",
+  "description": "Order delicious meals from Savannah Fast Food.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff8ed",
+  "theme_color": "#e87522",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
