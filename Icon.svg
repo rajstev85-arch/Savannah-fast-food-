@@ -1,0 +1,8 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="100" fill="#e87522"/>
+  <circle cx="256" cy="256" r="190" fill="#fff8ed"/>
+  <path d="M145 300 Q256 120 367 300" fill="none" stroke="#e87522" stroke-width="28" stroke-linecap="round"/>
+  <text x="256" y="280" text-anchor="middle" font-size="125" font-weight="bold" fill="#e87522" font-family="Arial">S</text>
+  <text x="256" y="365" text-anchor="middle" font-size="38" font-weight="bold" fill="#333">SAVANNAH</text>
+</svg>
