@@ -121,12 +121,14 @@ footer{background:var(--green);color:white;text-align:center;padding:25px 12px;f
  <path d="M18 78Q50 67 82 78" stroke="#173b2b" stroke-width="4" fill="none"/>
  <text x="50" y="92" text-anchor="middle" font-size="8" font-weight="bold" fill="#173b2b">SAVANNAH</text>
 </svg>
+
 <div class="brand">
 <h1>Savannah Fast Food</h1>
 <p>Good food. Easy ordering. Delivered to you.</p>
 </div>
+
 <div class="headerbuttons">
-<a class="btn whitebtn" href="tel:0799378702">☎ Call us</a>
+<a class="btn whitebtn" href="tel:+254799378702">☎ Call us</a>
 <a class="btn gold" href="https://wa.me/254799378702">WhatsApp</a>
 </div>
 </div>
@@ -150,7 +152,7 @@ footer{background:var(--green);color:white;text-align:center;padding:25px 12px;f
 <p>Choose your Savannah combo, add it to your cart and send your order through WhatsApp.</p>
 <p><b>Free delivery · Pay after delivery</b></p>
 <div class="heroactions">
-<a class="btn gold" href="tel:0799378702">☎ CALL 0799378702</a>
+<a class="btn gold" href="tel:+254799378702">☎ CALL 0799378702</a>
 <a class="btn greenbtn" href="https://wa.me/254799378702">ORDER ON WHATSAPP</a>
 </div>
 </div>
@@ -210,7 +212,7 @@ Free delivery · Pay after delivery
 <h2>🔒 Savannah is currently closed</h2>
 <p>Our ordering hours are 8:30 AM to 6:00 PM. Please come back during opening hours.</p>
 <p id="nextOpening"></p>
-<a class="btn gold" href="tel:0799378702">Call us for enquiries</a>
+<a class="btn gold" href="tel:+254799378702">Call us for enquiries</a>
 </div>
 </div>
 
@@ -223,6 +225,8 @@ Free delivery · Pay after delivery
 </div>
 
 <script>
+"use strict";
+
 const photos = {
  chicken:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=80",
  choma:"https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
@@ -232,7 +236,7 @@ const photos = {
  family:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=80"
 };
 
-// The original 42 menu listings are preserved.
+// All 42 menu listings
 const combos = [
 ["Savannah Chicken Feast","½ broiler chicken, chips, 300ml soda",780,"Chicken lovers","chicken"],
 ["Kienyeji Traditional Feast","¼ kienyeji chicken, mukimo, vegetables",720,"Chicken lovers","chicken"],
@@ -294,6 +298,7 @@ const categories = [
 
 let activeCategory = "All combos";
 let cart = {};
+let deferredInstallPrompt = null;
 
 const menu = document.getElementById("menu");
 const search = document.getElementById("search");
@@ -343,6 +348,10 @@ function renderMenu(){
 }
 
 function addToCart(i){
+ if(!isOpenNow()){
+  updateHours();
+  return;
+ }
  cart[i]=(cart[i]||0)+1;
  updateCart();
 }
@@ -380,7 +389,10 @@ function updateCart(){
 }
 
 function openCart(){
- if(document.getElementById("lock").classList.contains("show"))return;
+ if(!isOpenNow()){
+  updateHours();
+  return;
+ }
  document.getElementById("cartModal").classList.add("show");
  updateCart();
 }
@@ -389,10 +401,15 @@ function closeCart(){
 }
 
 function sendOrder(){
+ if(!isOpenNow()){
+  updateHours();
+  return;
+ }
  if(!Object.keys(cart).length){
   alert("Your cart is empty.");
   return;
  }
+
  const name=document.getElementById("customer").value.trim();
  const location=document.getElementById("location").value.trim();
  const instructions=document.getElementById("instructions").value.trim();
@@ -421,8 +438,8 @@ function sendOrder(){
  window.open(whatsappUrl,"_blank");
 }
 
-// Nairobi/Kenya local time for ordering hours (8:30 AM–6:00 PM).
-function updateHours(){
+// All time calculations use Kenya time.
+function getKenyaTime(){
  const parts=new Intl.DateTimeFormat("en-GB",{
   timeZone:"Africa/Nairobi",
   hour:"2-digit",
@@ -431,7 +448,4 @@ function updateHours(){
  }).formatToParts(new Date());
 
  const h=Number(parts.find(p=>p.type==="hour").value);
- const m=Number(parts.find(p=>p.type==="minute").value);
- const now=h*60+m;
- const opening=8*60+30;
- const closing=18*60;
+ const m=Number(parts.find(p=>p.
