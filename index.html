@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +7,11 @@
 <meta name="description" content="Savannah Fast Food Nyahururu. Delicious combo meals, free delivery and easy WhatsApp ordering.">
 <title>Savannah Fast Food | Nyahururu</title>
 
-</style>
-
 <link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#173b2b">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Savannah">
 
-</head>
- 
 <style>
 :root {
  --green:#173b2b;
@@ -36,17 +30,20 @@ header{background:linear-gradient(135deg,#153525,#28583d);color:white;padding:18
 .logo{width:65px;height:65px;flex-shrink:0}
 .brand h1{margin:0;font-size:clamp(22px,5vw,34px)}
 .brand p{margin:4px 0 0;color:#f7dfaa;font-size:13px}
-.headerbuttons{margin-left:auto;display:flex;gap:8px}
+.headerbuttons{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
 .btn{border:0;border-radius:30px;padding:12px 17px;font-weight:bold;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 .gold{background:var(--gold);color:#25251e}
 .greenbtn{background:var(--green);color:white}
 .whitebtn{background:white;color:var(--green)}
 .notice{max-width:1150px;margin:13px auto 0;background:#ffffff16;border:1px solid #ffffff35;border-radius:12px;padding:12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px}
+.install-strip{max-width:1150px;margin:12px auto 0;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f4b942;color:#173b2b;padding:10px 13px;border-radius:12px;font-size:13px}
+.install-strip button{border:0;border-radius:9px;padding:9px 12px;font-weight:bold;background:#173b2b;color:white;cursor:pointer}
 main{max-width:1150px;margin:auto;padding:16px 13px 100px}
 .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;align-items:center;background:white;border:1px solid var(--line);border-radius:20px;padding:20px;margin:4px 0 20px}
 .hero h2{font-size:clamp(25px,4vw,38px);line-height:1.1;color:var(--green);margin:0 0 10px}
 .hero p{color:var(--muted);line-height:1.5}
 .hero img{width:100%;height:185px;object-fit:cover;border-radius:15px}
+.heroactions{display:flex;gap:9px;flex-wrap:wrap}
 .search{width:100%;padding:15px;border:1px solid var(--line);border-radius:13px;font-size:16px;margin-bottom:13px}
 .filters{display:flex;gap:8px;overflow-x:auto;padding:3px 0 12px}
 .filter{white-space:nowrap;border:1px solid var(--line);background:white;color:var(--green);border-radius:25px;padding:9px 14px;font-weight:bold;cursor:pointer}
@@ -72,12 +69,12 @@ footer{background:var(--green);color:white;text-align:center;padding:25px 12px;f
 .modal{display:none;position:fixed;inset:0;background:#0009;z-index:20;align-items:flex-end;justify-content:center;padding:10px}
 .modal.show{display:flex}
 .panel{width:min(570px,100%);max-height:90vh;overflow:auto;background:white;border-radius:20px;padding:18px}
-.paneltop{display:flex;justify-content:space-between;align-items:center}
+.paneltop{display:flex;justify-content:space-between;align-items:center;gap:10px}
 .panel h2{margin:0;color:var(--green)}
-.close{border:0;border-radius:50%;width:35px;height:35px;font-size:21px}
+.close{border:0;border-radius:50%;width:35px;height:35px;font-size:21px;cursor:pointer}
 .cartitem{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
 .qty{display:flex;align-items:center;gap:8px}
-.qty button{border:0;border-radius:7px;padding:6px 10px;font-weight:bold}
+.qty button{border:0;border-radius:7px;padding:6px 10px;font-weight:bold;cursor:pointer}
 .field{display:block;margin:12px 0 5px;font-weight:bold;font-size:13px}
 .panel input,.panel textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit}
 .panel textarea{min-height:65px}
@@ -86,7 +83,17 @@ footer{background:var(--green);color:white;text-align:center;padding:25px 12px;f
 .lockbox{max-width:420px}
 .lock h2{font-size:30px}
 .lock p{line-height:1.6;color:#dce8dd}
-@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}.hero img{height:160px}}
+.installmodal{display:none;position:fixed;inset:0;background:#0009;z-index:60;align-items:center;justify-content:center;padding:15px}
+.installmodal.show{display:flex}
+.installbox{background:white;color:var(--ink);width:min(440px,100%);border-radius:18px;padding:20px}
+.installbox h2{color:var(--green);margin-top:0}
+.installbox p{line-height:1.55}
+.installbox button{margin-top:8px}
+@media(max-width:800px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .hero{grid-template-columns:1fr}
+ .hero img{height:160px}
+}
 @media(max-width:480px){
  .grid{gap:9px}
  .card img{height:115px}
@@ -97,6 +104,8 @@ footer{background:var(--green);color:white;text-align:center;padding:25px 12px;f
  .add{padding:9px}
  .logo{width:52px;height:52px}
  .headerbuttons{display:none}
+ .heroactions .btn{width:100%}
+ .cartbar{bottom:8px}
 }
 </style>
 </head>
@@ -121,10 +130,16 @@ footer{background:var(--green);color:white;text-align:center;padding:25px 12px;f
 <a class="btn gold" href="https://wa.me/254799378702">WhatsApp</a>
 </div>
 </div>
+
 <div class="notice">
 <span>🚚 <b>FREE DELIVERY</b></span>
 <span>Opening: 8:30 AM – 6:00 PM</span>
 <span id="hoursCountdown">Checking opening hours…</span>
+</div>
+
+<div class="install-strip" id="installStrip">
+<span><b>📲 Get Savannah on your phone</b> — installation is optional.</span>
+<button onclick="installOrExplain()">Install Savannah</button>
 </div>
 </header>
 
@@ -134,13 +149,15 @@ footer{background:var(--green);color:white;text-align:center;padding:25px 12px;f
 <h2>Your favourite meals, made easy!</h2>
 <p>Choose your Savannah combo, add it to your cart and send your order through WhatsApp.</p>
 <p><b>Free delivery · Pay after delivery</b></p>
+<div class="heroactions">
 <a class="btn gold" href="tel:0799378702">☎ CALL 0799378702</a>
 <a class="btn greenbtn" href="https://wa.me/254799378702">ORDER ON WHATSAPP</a>
+</div>
 </div>
 <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=1000&q=85" alt="Chicken and chips">
 </section>
 
-<input id="search" class="search" type="search" placeholder="Search combos: chicken, pilau, choma...">
+<input id="search" class="search" type="search" placeholder="Search combos: chicken, pilau, choma..." aria-label="Search combos">
 
 <div class="filters" id="filters"></div>
 
@@ -169,14 +186,14 @@ Free delivery · Pay after delivery
 <div class="panel">
 <div class="paneltop">
 <h2>Your Savannah Cart</h2>
-<button class="close" onclick="closeCart()">×</button>
+<button class="close" onclick="closeCart()" aria-label="Close cart">×</button>
 </div>
 <div id="cartItems"></div>
 <h3 id="modalTotal">Total: KSh 0</h3>
 <p style="font-size:12px;color:#73786e">Free delivery. Payment after delivery.</p>
 
 <label class="field" for="customer">Your name</label>
-<input id="customer" placeholder="Enter your name">
+<input id="customer" placeholder="Enter your name" autocomplete="name">
 
 <label class="field" for="location">Delivery location</label>
 <input id="location" placeholder="Estate, street or landmark">
@@ -197,6 +214,14 @@ Free delivery · Pay after delivery
 </div>
 </div>
 
+<div class="installmodal" id="installModal" onclick="if(event.target===this)closeInstallHelp()">
+<div class="installbox">
+<h2>Install Savannah Fast Food</h2>
+<div id="installHelpText"></div>
+<button class="checkout" style="width:100%" onclick="closeInstallHelp()">Got it</button>
+</div>
+</div>
+
 <script>
 const photos = {
  chicken:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=900&q=80",
@@ -207,9 +232,7 @@ const photos = {
  family:"https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=900&q=80"
 };
 
-// 42 discussed menu listings.
-// Prices use the sum of the component selling prices.
-// Some special listings repeat the ingredients of regular combos.
+// The original 42 menu listings are preserved.
 const combos = [
 ["Savannah Chicken Feast","½ broiler chicken, chips, 300ml soda",780,"Chicken lovers","chicken"],
 ["Kienyeji Traditional Feast","¼ kienyeji chicken, mukimo, vegetables",720,"Chicken lovers","chicken"],
@@ -348,15 +371,16 @@ function updateCart(){
    <div><b>${combos[Number(i)][0]}</b>
    <div style="font-size:12px;color:#73786e">KSh ${combos[Number(i)][2]} each</div></div>
    <div class="qty">
-    <button onclick="changeQty(${i},-1)">−</button>
+    <button onclick="changeQty(${i},-1)" aria-label="Decrease quantity">−</button>
     <b>${n}</b>
-    <button onclick="changeQty(${i},1)">+</button>
+    <button onclick="changeQty(${i},1)" aria-label="Increase quantity">+</button>
    </div>
   </div>`).join("") :
   "<p>Your cart is empty. Add a combo to begin.</p>";
 }
 
 function openCart(){
+ if(document.getElementById("lock").classList.contains("show"))return;
  document.getElementById("cartModal").classList.add("show");
  updateCart();
 }
@@ -393,13 +417,11 @@ function sendOrder(){
  `\n\nName: ${name}\nDelivery location: ${location}`+
  `\nInstructions: ${instructions||"None"}`;
 
- window.open(
-  "https://wa.me/254799378702?text="+encodeURIComponent(message),
-  "_blank"
- );
+ const whatsappUrl="https://wa.me/254799378702?text="+encodeURIComponent(message);
+ window.open(whatsappUrl,"_blank");
 }
 
-// Opening hours are based on Kenya local time.
+// Nairobi/Kenya local time for ordering hours (8:30 AM–6:00 PM).
 function updateHours(){
  const parts=new Intl.DateTimeFormat("en-GB",{
   timeZone:"Africa/Nairobi",
@@ -413,35 +435,3 @@ function updateHours(){
  const now=h*60+m;
  const opening=8*60+30;
  const closing=18*60;
- const isOpen=now>=opening && now<closing;
-
- document.getElementById("lock").classList.toggle("show",!isOpen);
-
- if(isOpen){
-  const remaining=closing-now;
-  document.getElementById("hoursCountdown").textContent=
-   `Closing in ${Math.floor(remaining/60)}h ${remaining%60}m`;
-  document.getElementById("nextOpening").textContent="";
- }else if(now<opening){
-  const remaining=opening-now;
-  document.getElementById("hoursCountdown").textContent=
-   `Opens in ${Math.floor(remaining/60)}h ${remaining%60}m`;
-  document.getElementById("nextOpening").textContent=
-   "We open today at 8:30 AM.";
- }else{
-  document.getElementById("hoursCountdown").textContent=
-   "Closed — opens tomorrow at 8:30 AM";
-  document.getElementById("nextOpening").textContent=
-   "Please return tomorrow from 8:30 AM.";
- }
-}
-
-search.addEventListener("input",renderMenu);
-renderFilters();
-renderMenu();
-updateCart();
-updateHours();
-setInterval(updateHours,30000);
-</script>
-</body>
-</html>
